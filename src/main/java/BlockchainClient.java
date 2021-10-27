@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class BlockchainClient {
     public static ArrayList<Block> blockchain = new ArrayList<>(); // makes resizable array of blocks (this is our "chain" of blocks)
+    // a blockchain is just a really slow linked list that takes computational power to add another node and can be verified quickly
 
     public static void main(String[] args) {
         //add our blocks to the blockchain ArrayList:
@@ -11,7 +12,7 @@ public class BlockchainClient {
         insertBlock(new Block(inp.nextLine(), "0")); // genesis block with hash of 0
         label:
         while (true) {
-            System.out.println("aight u finna add another block (1), validate the blockchain (2), or quit (3)");
+            System.out.println("aight u finna add another block (1), validate the blockchain (2), quit (3), or print the chain (4)");
             String answer = inp.nextLine();
             switch (answer) {
                 case "1":
@@ -27,14 +28,19 @@ public class BlockchainClient {
                     break;
                 case "3":
                     break label;
+                case "4":
+                    printChain();
                 default:
-                    System.out.println("input isnt valid");
                     break;
             }
 
         }
     }
-
+    public static void printChain() {
+        for (Block block : blockchain) {
+            System.out.println(block);
+        }
+    }
     public static boolean validateChain() {
         Block currentBlock;
         Block previousBlock;

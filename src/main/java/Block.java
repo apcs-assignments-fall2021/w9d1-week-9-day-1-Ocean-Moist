@@ -55,4 +55,8 @@ public class Block {
         }
         this.difficultyString = stringDiff;
     }
+
+    @Override public String toString() {
+        return "hash: " + hash + "\ntime stamp: " + timeStamp + "\nmessage: " + message + "\n";
+    }
 }
