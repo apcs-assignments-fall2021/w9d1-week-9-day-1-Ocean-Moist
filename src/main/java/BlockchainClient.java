@@ -44,12 +44,13 @@ public class BlockchainClient {
     public static boolean validateChain() {
         Block currentBlock;
         Block previousBlock;
-        String hashTarget = blockchain.get(blockchain.size() - 1).getDifficultyString();
+
 
         // loop through blockchain to check hashes:
         for (int i = 1; i < blockchain.size(); i++) {
             currentBlock = blockchain.get(i);
             previousBlock = blockchain.get(i - 1);
+
             // compare registered hash and calculated hash:
             if (!currentBlock.getHash().equals(currentBlock.makeHash())) {
                 return false;
@@ -59,7 +60,7 @@ public class BlockchainClient {
                 return false;
             }
             // check if hash is solved
-            if (!currentBlock.getHash().substring(0, currentBlock.getDifficulty()).equals(hashTarget)) {
+            if (!currentBlock.getHash().startsWith(currentBlock.getDifficultyString())) {
                 return false;
             }
 
